@@ -1,13 +1,29 @@
 import os
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import pandas as pd
 
+
+# read fake db
 db = pd.read_json('db.json')
 
 print(db)
 
+
+
 app = FastAPI()
+
+# Handle CORS
+
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # add hello message
 @app.get('/')

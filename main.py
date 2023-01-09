@@ -6,11 +6,6 @@ import pandas as pd
 from database import db, movies
 
 
-# read fake db
-db = pd.read_json('db.json')
-
-print(db)
-
 
 app = FastAPI()
 
@@ -60,7 +55,7 @@ async def delete_movie_by_id(id:int):
 
 
 # @app.post('/api/add/movie')
-#     db.
+    
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=os.getenv(

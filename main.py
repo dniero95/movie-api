@@ -43,18 +43,21 @@ async def fetch_all_movies():
     return all_movies
 
 # get a movie by id
-'''The following line of code are commented to test deply
+# '''The following line of code are commented to test deply
 
 
 @app.get('/api/movie/{id}')
 async def get_movie_by_id(id:int):
-    movie_id = id
-    return db.query('MovieID == @movie_id').to_dict('index')
+    one_movie = []
+    for movie in movies.find({"MovieID":id}, {"_id": 0, "MovieID": 1, "MovieTitle": 1, "MovieGenre": 1}):
+        one_movie.append(movie)
+    return one_movie[0]
+   
 
 @app.delete('/api/delete/movie/{id}')
 async def delete_movie_by_id(id:int):
     db.drop(db[db.MovieID == id].index, inplace=True)
-'''
+
 
 # @app.post('/api/add/movie')
 #     db.

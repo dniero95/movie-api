@@ -3,13 +3,13 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import pandas as pd
+from database import db, movies
 
 
 # read fake db
 db = pd.read_json('db.json')
 
 print(db)
-
 
 
 app = FastAPI()
@@ -26,14 +26,21 @@ app.add_middleware(
 )
 
 # add hello message
+
+
 @app.get('/')
 def hello():
     return {"message": "Welcome in movie-api"}
 
 # Return all the movies in the database
+
+
 @app.get('/api/movies')
 async def fetch_all_movies():
-    return db.to_dict('index')
+    all_movies = []
+    for movie in movies.find({}, {"_id": 0, "MovieID": 1, "MovieTitle": 1, "MovieGenre": 1}):
+        all_movies.append(movie)
+    return all_movies
 
 # get a movie by id
 '''The following line of code are commented to test deply
@@ -48,9 +55,10 @@ async def get_movie_by_id(id:int):
 async def delete_movie_by_id(id:int):
     db.drop(db[db.MovieID == id].index, inplace=True)
 '''
-    
+
 # @app.post('/api/add/movie')
 #     db.
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=os.getenv("PORT", default=5000), log_level="info")
+    uvicorn.run("main:app", host="0.0.0.0", port=os.getenv(
+        "PORT", default=5000), log_level="info")

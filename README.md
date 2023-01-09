@@ -7,4 +7,13 @@ During my first year at [ITS ICT Piemonte](https://www.its-ictpiemonte.it) I att
 
 ## Requirements
 
-To run the project on localhost 
+To run the project on localhost you need a version of python at least 3.10.* and the libraries in [requirements](./requirements.txt)
+
+To install the you can run the following command in your terminal:
+
+```python
+pip install fastapi
+pip install uvicorn
+pip install pandas
+```
+

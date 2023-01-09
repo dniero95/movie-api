@@ -56,7 +56,7 @@ async def get_movie_by_id(id:int):
 
 @app.delete('/api/delete/movie/{id}')
 async def delete_movie_by_id(id:int):
-    db.drop(db[db.MovieID == id].index, inplace=True)
+    movies.delete_one({"MovieID":id})
 
 
 # @app.post('/api/add/movie')

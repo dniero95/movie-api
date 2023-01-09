@@ -17,3 +17,16 @@ pip install uvicorn
 pip install pandas
 ```
 
+## Run the project 
+
+After your system satisfy the requirements use your terminal to navigate to the folder that contain the project and run 
+
+```python
+uvicorn main:app
+```
+
+Then paste in your browser the following URL 
+```
+http://127.0.0.1:8000/docs
+```
+To see the documentation generated with FastAPI

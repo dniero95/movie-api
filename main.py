@@ -61,6 +61,14 @@ async def add_movie(movie: Movie):
                        "MovieGenre": movie.MovieGenre})
 
 
+@app.put('/api/update/movie/{id}')
+async def update_movie(id:int, movie: Movie):
+    movies.update_one(
+        {"MovieID": id},
+        { "$set": { "MovieTitle": movie.MovieTitle,
+                    "MovieGenre": movie.MovieGenre } }
+    )
+
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=os.getenv(
         "PORT", default=5000), log_level="info")

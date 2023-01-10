@@ -1,9 +1,11 @@
+import os
 import pymongo
-import json
+from dotenv import load_dotenv
 
-
-
-mongo_client = pymongo.MongoClient("mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.5.4")
+load_dotenv()
+DB_PASSWORD = os.getenv('DB_PASSWORD')
+DB_USER = os.getenv('DB_USER')
+mongo_client = pymongo.MongoClient(f"mongodb+srv://{DB_USER}:{DB_PASSWORD}@movies-api.mnn4cyp.mongodb.net/?retryWrites=true&w=majority")
 db = mongo_client["movies-api-db"]
 
 movies = db["movies"]

@@ -2,9 +2,9 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
-import pandas as pd
-from database import db, movies
 
+from database import db, movies
+from model import Movie
 
 
 app = FastAPI()
@@ -42,20 +42,24 @@ async def fetch_all_movies():
 
 
 @app.get('/api/movie/{id}')
-async def get_movie_by_id(id:int):
+async def get_movie_by_id(id: int):
     one_movie = []
-    for movie in movies.find({"MovieID":id}, {"_id": 0, "MovieID": 1, "MovieTitle": 1, "MovieGenre": 1}):
+    for movie in movies.find({"MovieID": id}, {"_id": 0, "MovieID": 1, "MovieTitle": 1, "MovieGenre": 1}):
         one_movie.append(movie)
     return one_movie[0]
-   
+
 
 @app.delete('/api/delete/movie/{id}')
-async def delete_movie_by_id(id:int):
-    movies.delete_one({"MovieID":id})
+async def delete_movie_by_id(id: int):
+    movies.delete_one({"MovieID": id})
 
 
-# @app.post('/api/add/movie')
-    
+@app.post('/api/add/movie')
+async def add_movie(movie: Movie):
+    movies.insert_one({"MovieID": movie.MovieID,
+                       "MovieTitle": movie.MovieTitle,
+                       "MovieGenre": movie.MovieGenre})
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=os.getenv(

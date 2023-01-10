@@ -2,21 +2,29 @@
     {
         "MovieID": 1,
         "MovieTitle": "Eyes Wide Shut",
-        "MovieGenre": "Comedy"
+        "MovieGenre": ["Comedy"]
     },
     {
         "MovieID": 2,
         "MovieTitle": "The Hobbit: An Unexpected Journey",
-        "MovieGenre": "Fantasys"
+        "MovieGenre": ["Fantasys"]
     },
     {
         "MovieID": 3,
         "MovieTitle": "Back to the Future",
-        "MovieGenre": "Sci-Fy"
+        "MovieGenre": ["Sci-Fy"]
     },
     {
         "MovieID": 4,
         "MovieTitle": "The Evil Dead",
-        "MovieGenre": "Horror"
+        "MovieGenre": ["Horror"]
+    },
+    {
+        "MovieID": 8,
+        "MovieTitle": "Eyes Wide Shut",
+        "MovieGenre": ["Comedy"]
     }
+    
 ]
+
+
